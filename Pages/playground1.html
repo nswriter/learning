@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NS | Java Excercises</title>
+    <link rel="stylesheet" href="../CSS/playground2.css">
+</head>
+<header>
+
+
+
+
+<div class="headerSpacer">
+    <div class="header">
+        <div><a href="../index.html">Nicholas Silva | Exercices</a></div>
+    </div>
+    <div class="inline">
+        <div><p><i><b class="Username">Set Username</b></i></p></div>
+        <div><button>Change User</button></div>
+    </div>
+   
+</div>
+
+<!-- <hr> -->
+    
+</header>
+
+
+<body>
+    <div class="content">
+    <h1>
+        <!--Playground--> Excercise: Basic Interactivity with Javascript
+    </h1>
+    <p>
+        This page follows the Mozilla Developers' Javascript tutorial <a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Getting_started/Your_first_website/Adding_interactivity" 
+        target="blank">"Adding Interactivity"</a>. Below are my initial notes recapping the process.
+    </p>
+    <p>1/31/25, 1:00-3:30 AM or there abouts.</p>
+    <hr>
+    <img src="Goof_Img/Ship1.png"width="50%">
+    <p><i><b class="caption">Ship1: An arid landscape. Click the image to see some Javascript at work!</b></i></p>
+
+   
+ 
+    <h2>Changing the Image</h2>
+    <p>
+        This page utilizes an <em>Event Listener</em> Javascript tag to "listen" for a click on the page. This variable, named <i>myImage</i>,
+        is tied to a <em>document.querySelector("img")</em> which means it will select all <i>img</i> tags on the page, and thus only accept clicks within
+        the content of an <i>img</i> tag. 
+    </p>
+    <p>
+        When a click is registered (or I suppose heard) it uses an if/else statement to modify the value of a variable <i>myImage</i>. 
+        This variable is, by default, set to the image "Ship1", the arid landscape. When clicked, the variable changes the path using the if statement to
+        lead to the "Ship2" image source, thus changing the displayed image to the arctic landscape. If clicked again, the variable uses the 
+        "else" statment to reset the image source to the "Ship1" path, since it has detected that the image is not on "Ship1" already, and was thus changed,
+        and so it needs to change it back. Each click will continue to cycle back and forth.
+    </p>
+    <p>
+        If there were other images being used on this page, then it would be wise to replace the general ("img")
+        selector with a more specific selector using a class name or id, something to tie the script to that specific image. Otherwise,
+        all images on the page, regardless of their content, would suddenly flip irrevocably to "Ship1", because the "else" statement would still
+        detect a lack of a "Ship1" source and automatically fill it back in, overwriting whatever source the other image had, and then locking this image
+        into the same back and forth cycle between 1 and 2, never returning to the original image (until the page were to be refreshed, of course). 
+    </p>
+    <p>
+        Note: I also added another constant using a class-based selector to change the caption for the images! I want to be able to change the alt text, too,
+        but that might just be a task for another day. 
+    </p>
+    <h2>Changing the User Name Welcome Message</h2>
+    <p>
+        I must admit I found this little trick quite fun to mess around with. While in this basic state it lacks any true weight behind the "User"
+        (that is only the name data item is stored, singularly, and only until it is overwritten--there is no retreivable profile) it grants the illusion,
+        while providing an interesting building block for later experiments.
+    </p>
+    <p>
+        This function uses a function (<i>setUserName</i>) to create a data item through the <em><a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API" target="_blank">Web Storage API</a></em>, 
+        meaning that whatever value gets assigned to it will be retained through localStorage on the web browser, retaining the information even if the browser gets closed.
+         This means that, at least for a longwhile, this page will remember whatever name you entered as your username. Pretty neat! More reaserch is required.
+    </p>
+    <p>
+        The functionality of this function is very similar in principle to the image selector above, but with some notable differences to account for its context.
+        The function uses another <i>querySelector</i>, this time set to a class of ".Username", so that it interacts only with the one "p" tag in the header
+        where the message is to be displayed. It would be pretty awkward if all of these notes just turned into a long list of "Welcome, y/n". I must say,
+        the original tutorial didn't have notes, or titles, or anything of that sort, so I leveraged my past knowlege of HTML and CSS selector interactions, and indeed
+        it works much the same. So that's cool.
+    </p>
+    <p>
+        The other difference to the image selector is the functionality surrounding the popup. To summon this popup, and accept a text input, this function utilizes
+        a nifty feature called <em>prompt</em> which accepts a string, which will be the text displayed in the popup. It also summons the popup itself, with the neccessary
+        functionality built in. There is an issue, by default, where you can choose to click "OK" without having entered a name, in which it would display "Welcome,", or 
+        you could click "Cancel" and it would close the popup and display "Welcome, null", with "null" being the default reply for an empty variable in Javascript.
+        To cicrumvent this for the moment, the tutorial includes what is esentially a copy of the <em>myName</em> constant, within the same <em>setUserName</em> function,
+         but this time includes an intervening "logical NOT" gate, <em>(!localStorage.getItem("name"))</em> to indicate that if localStorage does NOT have a name data item
+         stored, the next if/else statement should be run. This if/else statement is, as noted, quite similar to the previous except that it is calling
+         upon <i>const storedName</i> instead of <i>const myName</i>. This means that unless an input is added, creating or overwriting
+         the "name" data unit, it will continue to relaunch the popup. Once a "name" data unit is found, it becomes the <i>storedName</i>, and the else half of the function
+         will write that name into the ".Username" designated "p" tag, and all is well.
+    </p>
+    <p>
+        The "Change User" button simply uses another <i>querySelector</i> to detect if the button is pressed, and if it is, it launches the <i>setUserName</i> function
+        (I spelled that funtion so many times) above, allowing the stored user name to be, well, changed.
+    </p>
+
+    <h2>
+        My Thoughts
+    </h2>
+    <p>
+        This was honestly a really fun excercise, and a great introduction (or kinda-sorta reintroduction) to Javascript. The tutorial was very well constructed
+        and super easy to follow, and did a great job of explaining the steps involved, and what they actually do and mean (far better than I did above). 
+    </p>
+    <p>
+        I must say, too, that while I might not write as comprehensive of a breakdown every time, I do feel like this process of explaining what I just did
+        was indeed quite helpful. A bit of reflection on the process definitely helped me, at least right now in the moment, to feel like I better understood what I
+        just worked on. Hopefully it will help refresh my memory down the line, when I inevitably get distracted from Javascript for a time and forget everything.
+    </p>
+    <p>
+        Special shoutout to English 381 and co. for inspiring me to sit down and start getting into Javascript again. Also, why is my battery at 50%, it's plugged in. Hmm.
+        Anyways, goodnight. It's past 3AM on the first night of class. Of the first day of Spring 2025, for posterity's sake. What a productive start! 
+        But I've really got to go to bed! Happy coding!
+    </p>
+    </div>
+    <script src="scripts/main.js"></script>
+   
+</body>
+</html>
