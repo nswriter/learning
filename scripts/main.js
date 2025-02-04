@@ -3,7 +3,7 @@ const myCaption =document.querySelector(".caption")
 
 myImage.addEventListener("click", ()=>{
     const mySrc = myImage.getAttribute("src");
-    if (mySrc === "Goof_Img/Ship1.png") {
+    if (mySrc === "../Goof_Img/Ship1.png") {
         myImage.setAttribute("src", "../Goof_Img/Ship2.png")
         myCaption.textContent = `Ship2: A frigid arctic wasteland. In other words, the function worked! Click again to go back to the other image!`
     } else {
